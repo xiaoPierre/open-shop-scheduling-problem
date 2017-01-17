@@ -70,6 +70,7 @@ for machine in range(4):
 bouton_sortir = Button(racine,text="Sortir",command=racine.destroy)
 bouton_sortir.pack()
 
-print(calculateWCT(jobs))
+print()
+print("The weighted completion time of approche " + str(sys.argv[1][0:-4]) + " is " + str(calculateWCT(jobs)))
 
 racine.mainloop()

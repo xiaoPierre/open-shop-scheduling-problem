@@ -108,7 +108,7 @@ void heuristiqueErkang(Job** jobs, int nbJobs)
     printf("Weighted completion time: %f \n", wct);
     printf("\nEnd\n\n");
     //save the result for visualisation
-    saveJobs(jobs, nbJobs, "jobs.txt");
+    saveJobs(jobs, nbJobs, "heuristic.txt");
 
     // 6. clean memory usage
     for (int i = 0; i < NB_MACHINES; i++)
