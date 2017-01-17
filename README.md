@@ -5,7 +5,7 @@
 
 
 Dependencies:
-  * python 3
+  * python3, PyQt
   * cmake
   * gcc
 
