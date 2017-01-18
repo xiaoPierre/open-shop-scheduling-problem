@@ -1,5 +1,12 @@
 #/bin/bash
 
+if [ -d "build"]; then
+rmdir "build"
+mkdir "build"
+else
+mkdir "build"
+fi
+
 cd build
 cmake ..
 make
