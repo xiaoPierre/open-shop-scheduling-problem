@@ -51,7 +51,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/zhang/ordonnancement
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/zhang/ordonnancement
+CMAKE_BINARY_DIR = /home/zhang/ordonnancement/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/zhang/ordonnancement/CMakeFiles /home/zhang/ordonnancement/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/zhang/ordonnancement/build/CMakeFiles /home/zhang/ordonnancement/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/zhang/ordonnancement/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/zhang/ordonnancement/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -176,33 +176,6 @@ src/genetic.s: src/genetic.c.s
 src/genetic.c.s:
 	$(MAKE) -f CMakeFiles/heuristique.dir/build.make CMakeFiles/heuristique.dir/src/genetic.c.s
 .PHONY : src/genetic.c.s
-
-src/heuristiqueA.o: src/heuristiqueA.c.o
-
-.PHONY : src/heuristiqueA.o
-
-# target to build an object file
-src/heuristiqueA.c.o:
-	$(MAKE) -f CMakeFiles/heuristique.dir/build.make CMakeFiles/heuristique.dir/src/heuristiqueA.c.o
-.PHONY : src/heuristiqueA.c.o
-
-src/heuristiqueA.i: src/heuristiqueA.c.i
-
-.PHONY : src/heuristiqueA.i
-
-# target to preprocess a source file
-src/heuristiqueA.c.i:
-	$(MAKE) -f CMakeFiles/heuristique.dir/build.make CMakeFiles/heuristique.dir/src/heuristiqueA.c.i
-.PHONY : src/heuristiqueA.c.i
-
-src/heuristiqueA.s: src/heuristiqueA.c.s
-
-.PHONY : src/heuristiqueA.s
-
-# target to generate assembly for a file
-src/heuristiqueA.c.s:
-	$(MAKE) -f CMakeFiles/heuristique.dir/build.make CMakeFiles/heuristique.dir/src/heuristiqueA.c.s
-.PHONY : src/heuristiqueA.c.s
 
 src/heuristiqueErkang.o: src/heuristiqueErkang.c.o
 
@@ -312,6 +285,33 @@ src/job.c.s:
 	$(MAKE) -f CMakeFiles/heuristique.dir/build.make CMakeFiles/heuristique.dir/src/job.c.s
 .PHONY : src/job.c.s
 
+src/main.o: src/main.c.o
+
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.c.o:
+	$(MAKE) -f CMakeFiles/heuristique.dir/build.make CMakeFiles/heuristique.dir/src/main.c.o
+.PHONY : src/main.c.o
+
+src/main.i: src/main.c.i
+
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.c.i:
+	$(MAKE) -f CMakeFiles/heuristique.dir/build.make CMakeFiles/heuristique.dir/src/main.c.i
+.PHONY : src/main.c.i
+
+src/main.s: src/main.c.s
+
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.c.s:
+	$(MAKE) -f CMakeFiles/heuristique.dir/build.make CMakeFiles/heuristique.dir/src/main.c.s
+.PHONY : src/main.c.s
+
 src/tool.o: src/tool.c.o
 
 .PHONY : src/tool.o
@@ -354,9 +354,6 @@ help:
 	@echo "... src/genetic.o"
 	@echo "... src/genetic.i"
 	@echo "... src/genetic.s"
-	@echo "... src/heuristiqueA.o"
-	@echo "... src/heuristiqueA.i"
-	@echo "... src/heuristiqueA.s"
 	@echo "... src/heuristiqueErkang.o"
 	@echo "... src/heuristiqueErkang.i"
 	@echo "... src/heuristiqueErkang.s"
@@ -369,6 +366,9 @@ help:
 	@echo "... src/job.o"
 	@echo "... src/job.i"
 	@echo "... src/job.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 	@echo "... src/tool.o"
 	@echo "... src/tool.i"
 	@echo "... src/tool.s"

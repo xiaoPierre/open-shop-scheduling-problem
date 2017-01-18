@@ -13,7 +13,6 @@ void genetic(Job** jobs, int nbJobs)
 {
     srand((unsigned)time(NULL));
 
-
     printf("*************************************\n");
     printf("Genetic algorithm: \n");
     int ** species[NB_SPECIES];
@@ -42,7 +41,7 @@ void genetic(Job** jobs, int nbJobs)
         printf("The %d generation.\n", nbGeneration);
         // 1. Evaluation step
         double points[NB_SPECIES];
-        for (int i = 0; i < NB_MACHINES; i++)
+        for (int i = 0; i < NB_SPECIES; i++)
         {
             points[i] = evaluateSpecie(species[i], jobs, nbJobs);
         }
@@ -151,7 +150,7 @@ double evaluateSpecie(int** result, Job** jobs, int nbJobs)
         minPoint = pointD;
         idxOrder = 3;
     }
-    printf("The decided scheduling order is %d\n", idxOrder);
+    //printf("The decided scheduling order is %d\n", idxOrder);
     return minPoint;
 }
 
@@ -169,7 +168,7 @@ void selectOperator(int*** species, double* points, int nbJobs)
         {
             minPoint = points[i];
             idxSpecie = i;
-            printf("valeur %d\n", idxSpecie);
+            //printf("valeur %d\n", idxSpecie);
 
         }
     }

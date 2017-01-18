@@ -204,7 +204,7 @@ int decideStartTime(Job* job, int accumulatedTime, Node* intervalTree, int index
             if (candidates[i].low < minimumStartTime && candidates[i].low >= accumulatedTime)
             {
                 minimumStartTime = candidates[i].low;
-                printf("Find minimal start time is %d\n", minimumStartTime);
+                //printf("Find minimal start time is %d\n", minimumStartTime);
             }
         }
         else

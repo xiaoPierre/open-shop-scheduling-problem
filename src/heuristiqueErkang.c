@@ -108,7 +108,7 @@ void heuristiqueErkang(Job** jobs, int nbJobs)
     printf("Weighted completion time: %f \n", wct);
     printf("\nEnd\n\n");
     //save the result for visualisation
-    saveJobs(jobs, nbJobs, "heuristic.txt");
+    saveJobs(jobs, nbJobs, "heuristique.txt");
 
     // 6. clean memory usage
     for (int i = 0; i < NB_MACHINES; i++)
@@ -117,8 +117,6 @@ void heuristiqueErkang(Job** jobs, int nbJobs)
     }
     free(result);
 }
-
-
 
 
 void scheduleOnAllMachines(int** result, Job** jobs, int nbJobs, int indexCriticalMachine)
@@ -188,6 +186,3 @@ void scheduleOnOneMachine(int** result, Job** jobs, int nbJobs, int indexMachine
 
     printf("End of scheduling on machine %d\n\n", indexMachine);
 }
-
-
-

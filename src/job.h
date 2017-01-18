@@ -32,5 +32,3 @@ int getLatestEndTime(Job* job);
 
 
 #endif //OPENSHOP_JOB_H
-
-

@@ -1,3 +1,0 @@
-/home/zhang/ordonnancement/CMakeFiles/edit_cache.dir
-/home/zhang/ordonnancement/CMakeFiles/rebuild_cache.dir
-/home/zhang/ordonnancement/CMakeFiles/heuristique.dir

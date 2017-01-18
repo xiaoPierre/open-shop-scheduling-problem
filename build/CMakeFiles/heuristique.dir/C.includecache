@@ -28,20 +28,6 @@ init.h
 tool.h
 /home/zhang/ordonnancement/src/tool.h
 
-/home/zhang/ordonnancement/src/heuristiqueA.c
-init.h
-/home/zhang/ordonnancement/src/init.h
-tool.h
-/home/zhang/ordonnancement/src/tool.h
-heuristiqueErkang.h
-/home/zhang/ordonnancement/src/heuristiqueErkang.h
-exactSolution.h
-/home/zhang/ordonnancement/src/exactSolution.h
-intervalTree.h
-/home/zhang/ordonnancement/src/intervalTree.h
-genetic.h
-/home/zhang/ordonnancement/src/genetic.h
-
 /home/zhang/ordonnancement/src/heuristiqueErkang.c
 heuristiqueErkang.h
 /home/zhang/ordonnancement/src/heuristiqueErkang.h
@@ -83,6 +69,12 @@ job.h
 /home/zhang/ordonnancement/src/job.h
 
 /home/zhang/ordonnancement/src/job.h
+
+/home/zhang/ordonnancement/src/main.c
+heuristiqueErkang.h
+/home/zhang/ordonnancement/src/heuristiqueErkang.h
+genetic.h
+/home/zhang/ordonnancement/src/genetic.h
 
 /home/zhang/ordonnancement/src/tool.c
 tool.h

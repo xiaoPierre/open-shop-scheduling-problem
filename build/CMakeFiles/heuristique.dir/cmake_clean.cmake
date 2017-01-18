@@ -1,9 +1,9 @@
 file(REMOVE_RECURSE
   "CMakeFiles/heuristique.dir/src/heuristiqueErkang.c.o"
   "CMakeFiles/heuristique.dir/src/job.c.o"
+  "CMakeFiles/heuristique.dir/src/main.c.o"
   "CMakeFiles/heuristique.dir/src/genetic.c.o"
   "CMakeFiles/heuristique.dir/src/tool.c.o"
-  "CMakeFiles/heuristique.dir/src/heuristiqueA.c.o"
   "CMakeFiles/heuristique.dir/src/exactSolution.c.o"
   "CMakeFiles/heuristique.dir/src/intervalTree.c.o"
   "CMakeFiles/heuristique.dir/src/init.c.o"
