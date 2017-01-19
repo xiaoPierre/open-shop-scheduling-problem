@@ -4,9 +4,9 @@
 #include <time.h>
 #include "genetic.h"
 #include "init.h"
-#define MAX_GENERATION 100
-#define NB_SPECIES 1000
-#define MUTATION_TIME 100
+#define MAX_GENERATION 300
+#define NB_SPECIES 2500
+#define MUTATION_TIME 60
 
 
 void genetic(Job** jobs, int nbJobs)
@@ -18,6 +18,10 @@ void genetic(Job** jobs, int nbJobs)
     int ** species[NB_SPECIES];
 
     //init first generation
+    /*
+     * Initiate with random sequence of jobs
+     *
+     */
     for (int i = 0; i < NB_SPECIES; i++)
     {
         int ** result = (int**) malloc(NB_MACHINES * sizeof(int*));
@@ -33,14 +37,14 @@ void genetic(Job** jobs, int nbJobs)
 
 
     int nbGeneration = 0;
+    double points[NB_SPECIES];
     while (nbGeneration < MAX_GENERATION)
     {
-        // 0. Initialisation of species (all species become unscheduled)
+        // 0. Initialisation of species (all jobs become unscheduled)
         reinitializeJobs(jobs, nbJobs);
 
-        printf("The %d generation.\n", nbGeneration);
-        // 1. Evaluation step
-        double points[NB_SPECIES];
+        printf("The %d generation:\n", nbGeneration);
+        // 1. Evaluation step (calculate fitness of each specie)
         for (int i = 0; i < NB_SPECIES; i++)
         {
             points[i] = evaluateSpecie(species[i], jobs, nbJobs);
@@ -59,6 +63,9 @@ void genetic(Job** jobs, int nbJobs)
         nbGeneration++;
 
     }
+    int ** result;
+    result = chooseBestSpecie(species, points);
+    scheduleBestSpecie(result, jobs, nbJobs);
     saveJobs(jobs, nbJobs, "genetic.txt");
 
 
@@ -113,6 +120,10 @@ int* getRandomSequence(int nbJobs)
 
 double evaluateSpecie(int** result, Job** jobs, int nbJobs)
 {
+    /*
+     * Roughly evaluate each specie by scheduling with 4 different orders and take the best
+     * May be improved? Or not so important to evaluate precisely each specie?
+     */
     int orderA[NB_MACHINES] = {0, 1, 2, 3};
     int orderB[NB_MACHINES] = {1, 2, 3, 0};
     int orderC[NB_MACHINES] = {2, 3, 1, 0};
@@ -151,6 +162,7 @@ double evaluateSpecie(int** result, Job** jobs, int nbJobs)
         idxOrder = 3;
     }
     //printf("The decided scheduling order is %d\n", idxOrder);
+    reinitializeJobs(jobs, nbJobs);
     return minPoint;
 }
 
@@ -228,4 +240,71 @@ void reinitializeJobs(Job** jobs, int nbJobs)
             jobs[i]->start[j] = -1;
         }
     }
+}
+
+int ** chooseBestSpecie(int*** species, double* points)
+{
+    int minIdx = 0;
+    double minPoint = points[0];
+    for (int i = 1; i < NB_SPECIES; i++)
+    {
+        if (points[i] < minPoint)
+        {
+            minPoint = points[i];
+            minIdx = i;
+        }
+    }
+    return species[minIdx];
+}
+
+void scheduleBestSpecie(int** result, Job** jobs, int nbJobs)
+{
+    int orders[24][4] =
+            {
+                    {0,1,2,3},
+                    {0,1,3,2},
+                    {0,2,1,3},
+                    {0,2,3,1},
+                    {0,3,1,2},
+                    {0,3,2,1},
+                    {1,0,2,3},
+                    {1,0,3,2},
+                    {1,2,3,0},
+                    {1,2,0,3},
+                    {1,3,0,2},
+                    {1,3,2,0},
+                    {2,0,1,3},
+                    {2,0,3,1},
+                    {2,1,0,3},
+                    {2,1,3,0},
+                    {2,3,1,0},
+                    {2,3,0,1},
+                    {3,0,1,2},
+                    {3,0,2,1},
+                    {3,1,0,2},
+                    {3,1,2,0},
+                    {3,2,1,0},
+                    {3,2,0,1}
+            };
+    int* bestOrder;
+    reinitializeJobs(jobs, nbJobs);
+    schedule(result, orders[0], jobs, nbJobs);
+    double minPoint = weightedCompleteTime(jobs, nbJobs);
+    int minIdx = 0;
+
+    for (int i = 0; i < 24; i++)
+    {
+        int* order = orders[i];
+        reinitializeJobs(jobs, nbJobs);
+        schedule(result, order, jobs, nbJobs);
+        double point = weightedCompleteTime(jobs, nbJobs);
+        if (point < minPoint)
+        {
+            minPoint = point;
+            minIdx = i;
+        }
+    }
+    bestOrder = orders[minIdx];
+    reinitializeJobs(jobs, nbJobs);
+    schedule(result, bestOrder, jobs, nbJobs);
 }

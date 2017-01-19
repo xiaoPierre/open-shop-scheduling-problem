@@ -15,6 +15,9 @@ void selectOperator(int*** species, double* points, int nbJobs);
 void crossOperator(int*** species, int nbJobs);
 void mutationOperator(int*** species, int nbJobs, int nbGeneration);
 void reinitializeJobs(Job** jobs, int nbJobs);
+int ** chooseBestSpecie(int*** species, double* points);
+void scheduleBestSpecie(int** result, Job** jobs, int nbJobs);
+
 
 
 #endif //ORDO_GENETIC_H
