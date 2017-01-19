@@ -5,10 +5,18 @@
 #include "exactSolution.h"
 void exactSolution(Job** jobs, int nbJobs)
 {
+    /* Note: This is not the real exact solution.
+     * The exact solution is composed of two tables: one table with dimension [NB_MACHINES][NB_JOBS] representing the job sequence in each machine,
+     * another table with [NB_JOBS][NB_MACHINES] representing the order of machine for each job 
+     * (as we are in open-shop case, this order is not unique)
+     * Finally, the total number of solutions for open-shop is ((4!)^n) * ((n!)^4) with 4 machines and n jobs
+     * n = 5: 10e14  n=10: 10e38  n=20: 10e97 ??? try with n=3 at first time.. (5e6 solutions)
+     */
+
     /*
-     * Enumeration algorithm has a complexity of O((n!)^4)
+     * Enumeration algorithm has a complexity of (4!) * O((n!)^4)
      * It can only be calculated when nbJobs is really small (5? 6?)
-     * I don't know how to create and store integer array permutation in C!
+     * I don't know how to create and store integer array permutation in C! Let Corentin do this!
      * I can use python to generate the permutation easily though..
      */
     if (nbJobs > 5)
