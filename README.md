@@ -43,14 +43,14 @@
           Select the best known individuals, copy them in the next generation
           
        * Cross operator
-          Choose randomly ** two ** indivuduals.
+          Choose randomly two indivuduals
           Choose randomly a position of gene (an index)
           Exchange these two genes
           
        * Mutation operator
-          Choose randomly ** one ** indivudual
+          Choose randomly one indivudual
           Choose randomly two positions of gene (two index)
           Exchange these two genes
           
- ### Benchmark (on makespan)
+### Benchmark (on makespan)
  http://mistic.heig-vd.ch/taillard/problemes.dir/ordonnancement.dir/ordonnancement.html
