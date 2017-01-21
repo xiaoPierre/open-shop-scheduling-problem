@@ -4,9 +4,11 @@
 #include <time.h>
 #include "genetic.h"
 #include "init.h"
-#define MAX_GENERATION 300
-#define NB_SPECIES 2500
-#define MUTATION_TIME 60
+#define MAX_GENERATION 50
+#define NB_SPECIES 500
+#define MUTATION_TIME 150
+#define CROSS_TIME 150
+#define NB_RESERVED_INDIVIDU 20
 
 
 void genetic(Job** jobs, int nbJobs)
@@ -181,13 +183,13 @@ void selectOperator(int*** species, double* points, int nbJobs)
             minPoint = points[i];
             idxSpecie = i;
             //printf("valeur %d\n", idxSpecie);
-
         }
     }
 
     printf("The best specie is number %d\n", idxSpecie);
     printResultTable(species[idxSpecie], nbJobs);
 
+    /*
     //update other species
     for (int i = 0; i < NB_SPECIES; i++)
     {
@@ -195,10 +197,48 @@ void selectOperator(int*** species, double* points, int nbJobs)
         {
             for (int k = 0; k < nbJobs; k++)
             {
-                species[i][j][k] = species[idxSpecie][j][k];
+
+                {
+                    species[i][j][k] = species[idxSpecie][j][k];
+                }
             }
         }
     }
+     */
+
+
+    double seuil = minPoint * 1;
+    int* idxList = malloc(NB_RESERVED_INDIVIDU * sizeof(int));
+    int j = 0;
+    for (int i = 0; i < NB_SPECIES; i++)
+    {
+        if (points[i] <= seuil)
+        {
+            idxList[j++] = i;
+        }
+        if (j == NB_RESERVED_INDIVIDU)
+        {
+            break;
+        }
+    }
+    printf("Find %d good individus.\n", j);
+
+    // update other species with top j randomly (max NB_RESERVED_INDIVIDU)
+    for (int i = 0; i < NB_SPECIES; i++)
+    {
+        int idxSpecie = idxList[rand() % j];
+        for (int l = 0; l < NB_MACHINES; l++)
+        {
+            for (int k = 0; k < nbJobs; k++)
+            {
+
+                {
+                    species[i][l][k] = species[idxSpecie][l][k];
+                }
+            }
+        }
+    }
+    free(idxList);
 }
 
 void crossOperator(int*** species, int nbJobs)
@@ -206,6 +246,41 @@ void crossOperator(int*** species, int nbJobs)
     /*
      * Do nothing, because all species are the same
      */
+
+    int i = 0;
+    while (i < CROSS_TIME)
+    {
+        int individu1 = rand() % NB_SPECIES;
+        int individu2 = rand() % NB_SPECIES;
+        int idxMachine = rand() % NB_MACHINES;
+        int idxJob = rand() % nbJobs;
+
+        int individu1Before = species[individu1][idxMachine][idxJob];
+        int individu2Before = species[individu2][idxMachine][idxJob];
+
+        species[individu1][idxMachine][idxJob] = individu2Before;
+        species[individu2][idxMachine][idxJob] = individu1Before;
+
+        // treat the incompability
+        for (int j = 0; j < nbJobs; j++)
+        {
+            if (species[individu1][idxMachine][j] == individu2Before)
+            {
+                species[individu1][idxMachine][j] = individu1Before;
+                break;
+            }
+        }
+        for (int j = 0; j < nbJobs; j++)
+        {
+            if (species[individu2][idxMachine][j] == individu1Before)
+            {
+                species[individu2][idxMachine][j] = individu2Before;
+                break;
+            }
+        }
+        i++;
+    }
+
 }
 
 void mutationOperator(int*** species, int nbJobs, int nbGeneration)
@@ -308,3 +383,4 @@ void scheduleBestSpecie(int** result, Job** jobs, int nbJobs)
     reinitializeJobs(jobs, nbJobs);
     schedule(result, bestOrder, jobs, nbJobs);
 }
+
