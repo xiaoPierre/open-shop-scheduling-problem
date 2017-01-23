@@ -33,19 +33,20 @@
 #### 2. Genetic Algorithm:
        * Codage:
           Each solution is represented by a (NB_JOBS * 4) matrix and a (1 * 4) array  
-          (NB_JOBS * 4) matrix: job sequence in each of the 4 machines
+          (NB_JOBS * 4) matrix: job sequence in each of the 4 machines  
           (1 * 4) array: the scheduling order of 4 machine
           
        * Fitness function   
           Same as the objective function
           
        * Selection operator
-          Select the best known individuals, copy them in the next generation
+          Select the best known individuals, copy them in the next generation  
           
        * Cross operator
-          Choose randomly two indivuduals
+          Choose randomly two indivuduals
           Choose randomly a position of gene (an index)
           Exchange these two genes
+
           
        * Mutation operator
           Choose randomly one indivudual
