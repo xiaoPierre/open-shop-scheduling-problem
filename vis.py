@@ -51,8 +51,8 @@ zone_dessin = Canvas(racine, width=width, height=height) #Définit les dimension
 zone_dessin.pack() #Affiche le canevas
 
 for i in range(4):
-    zone_dessin.create_line(margeHorizontal, margeVertical + i * ecart, width - margeHorizontal,
-                            margeVertical + i * ecart)
+    zone_dessin.create_text(margeHorizontal - 40, margeVertical + i * ecart, text="machine "+ str(i+1))
+    zone_dessin.create_line(margeHorizontal, margeVertical + i * ecart, width - margeHorizontal,margeVertical + i * ecart)
 
 lenthOfUnityTime = lengthOfMainLine / maxEndDate
 
@@ -61,11 +61,14 @@ lenthOfUnityTime = lengthOfMainLine / maxEndDate
 colors = ["red", "yellow", "blue", "green", "black", "purple", "white", 'gray', 'navy', 'magenta']
 for machine in range(4):
     for idxJob in range(len(jobs)):
+        zone_dessin.create_text(20 + margeHorizontal + jobs[idxJob].startTime[machine] * lenthOfUnityTime, margeVertical + machine * ecart - 30, text=jobs[idxJob].identifiant)
         zone_dessin.create_rectangle(margeHorizontal + jobs[idxJob].startTime[machine] * lenthOfUnityTime,
                                      margeVertical + machine * ecart,
                                      margeHorizontal + (jobs[idxJob].startTime[machine] + jobs[idxJob].processTime[machine]) * lenthOfUnityTime,
                                      margeVertical + machine * ecart - 20,
                                      fill=colors[idxJob])
+
+
 
 bouton_sortir = Button(racine,text="Sortir",command=racine.destroy)
 bouton_sortir.pack()
